@@ -28,7 +28,7 @@ namespace c1tr00z.ld47.Gameplay {
         
         #region Unity Event
 
-        private void LateUpdate() {
+        protected virtual void LateUpdate() {
             Move();
             RefreshMoveState();
         }
@@ -38,7 +38,9 @@ namespace c1tr00z.ld47.Gameplay {
         #region Class Implementation
 
         private void Move() {
-            rigidbody.velocity = _direction * _speed;
+            var newVelocity = _direction * _speed;
+            newVelocity.y = rigidbody.velocity.y;
+            rigidbody.velocity = newVelocity;
         }
 
         protected void MoveTo(Vector3 direction) {

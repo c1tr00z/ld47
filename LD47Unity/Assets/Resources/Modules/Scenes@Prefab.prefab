@@ -56,5 +56,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346d22f5a26d8fc4fb2a73011e13df1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dbEntry: {fileID: 0}
-  _key: 
+  _dbEntry: {fileID: 11400000, guid: fa1230826c9a749948e767f086892ee8, type: 2}
+  _key: Prefab

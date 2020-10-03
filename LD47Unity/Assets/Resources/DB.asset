@@ -20,8 +20,12 @@ MonoBehaviour:
   - Modules/MenuController
   - Modules/Scenes
   - Modules/UI
+  - Player
+  - PlayerZombie
+  - PlayFrame
   - Saves/SavePlayerPrefs
   - Saves/SaveToBinaryFile
   - Saves/SaveToTXTFile
   - UI/UIDefaults
   - UI/UILayerMain
+  - Zombie

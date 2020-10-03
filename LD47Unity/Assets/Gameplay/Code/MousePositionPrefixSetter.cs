@@ -56,6 +56,7 @@ namespace c1tr00z.ld47.Gameplay {
         }
 
         private void LateUpdate() {
+            transform.rotation = Quaternion.LookRotation(lookingDirection);
             SetPrefix();
         }
 
