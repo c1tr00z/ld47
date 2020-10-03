@@ -31,7 +31,7 @@ namespace c1tr00z.ld47.Gameplay {
                 };
             }
 
-            if (colliderObjects.objects.Contains(obj)) {
+            if (!colliderObjects.objects.Contains(obj)) {
                 colliderObjects.objects.Add(obj);
             }
 

@@ -69,6 +69,11 @@ namespace c1tr00z.ld47.Gameplay {
             return _zombies.MinElement(z => transform.GetDistance(z.GetTransform()));
         }
 
+        public List<IZombie> GetInRange(float range) {
+            var result = _zombies.Where(z => transform.GetDistance(z.GetTransform()) <= range).ToList();
+            return result;
+        }
+
         #endregion
     }
 }

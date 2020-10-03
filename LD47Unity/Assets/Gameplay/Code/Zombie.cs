@@ -1,9 +1,10 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace c1tr00z.ld47.Gameplay {
-    public class Zombie : Movable, IZombie, IDamageable {
+    public class Zombie : BaseZombie {
 
         #region Enums
 
@@ -22,11 +23,7 @@ namespace c1tr00z.ld47.Gameplay {
 
         private float _actionStartedTime;
 
-        private Vector3 _direction;
-
-        private Transform _transform;
-
-        private Life _life;
+        private Vector3 _zombieDirection;
 
         private Collider _collider;
 
@@ -35,6 +32,8 @@ namespace c1tr00z.ld47.Gameplay {
         #region Accessors
 
         public Collider collider => this.GetCachedComponent(ref _collider); 
+        
+        public Player player { get; private set; }
 
         #endregion
 
@@ -42,6 +41,16 @@ namespace c1tr00z.ld47.Gameplay {
 
         private void Awake() {
             collider.AddToColliders(this);
+        }
+
+        protected override void OnEnable() {
+            base.OnEnable();
+            GameplayController.playerSpawned += GameplayControllerOnplayerSpawned;
+        }
+
+        protected override void OnDisable() {
+            base.OnDisable();
+            GameplayController.playerSpawned -= GameplayControllerOnplayerSpawned;
         }
 
         private void OnDestroy() {
@@ -54,8 +63,15 @@ namespace c1tr00z.ld47.Gameplay {
 
         protected override void LateUpdate() {
             base.LateUpdate();
+
+            if (player != null && GetTransform().GetDistance(player.transform) <= 10f) {
+                GetTransform().rotation = Quaternion.LookRotation(GetTransform().GetDirection(player.transform));
+                MoveTo(GetTransform().forward);
+                return;
+            }
+            
             if (_currentAction == ZombieAction.Move) {
-                MoveTo(_direction);
+                MoveTo(_zombieDirection);
             } else {
                 MoveTo(Vector3.zero);
             }
@@ -64,7 +80,7 @@ namespace c1tr00z.ld47.Gameplay {
                 _actionStartedTime = Time.time;
                 _currentAction = Random.Range(0f, 1f) > 0.7f ? ZombieAction.Move : ZombieAction.Idle;
                 if (_currentAction == ZombieAction.Move) {
-                    _direction = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+                    _zombieDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
                     _actionTime = Random.Range(1f, 10f);
                 } else {
                     _actionTime = Random.Range(5f, 30f);
@@ -73,21 +89,23 @@ namespace c1tr00z.ld47.Gameplay {
         }
         
         #endregion
-        
-        #region IZombie Implementation
 
-        public Transform GetTransform() {
-            return this.GetCachedComponent(ref _transform);
+        #region Class Implementation
+
+        public void Die() {
+            Destroy(gameObject);
+        }
+
+        private void GameplayControllerOnplayerSpawned(Player player) {
+            this.player = player;
         }
 
         #endregion
 
-        #region IDamageable Implementation
-
-        public Life GetLife() {
-            return this.GetCachedComponent(ref _life);
+        public override void OnEnterPunchZone() {
+            if (GetAllInPunchZone().OfType<Player>().Any()) {
+                Punch<Player>();
+            }
         }
-
-        #endregion
     }
 }

@@ -10,6 +10,8 @@ namespace c1tr00z.ld47.Gameplay {
         #region Events
 
         public static event Action<PlayerZombie> playerZombieSpawned;
+        
+        public static event Action<Player> playerSpawned;
 
         public static event Action Changed;
 
@@ -108,6 +110,7 @@ namespace c1tr00z.ld47.Gameplay {
         private void SpawnPlayer() {
             player = DB.Get<PlayerDBEntry>().LoadPrefab<Player>().Clone();
             player.transform.position = _room.playerSpawnPoint;
+            playerSpawned?.Invoke(player);
         }
 
         #endregion

@@ -5,5 +5,6 @@ namespace c1tr00z.ld47.Gameplay {
 
         Transform GetTransform();
 
+        Rigidbody GetRigidbody();
     }
 }

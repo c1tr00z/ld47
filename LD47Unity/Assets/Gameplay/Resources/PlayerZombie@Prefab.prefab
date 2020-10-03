@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3519977994764162471}
   - component: {fileID: 3519977994764162468}
   - component: {fileID: 803052764645816605}
+  - component: {fileID: -6552964797007865710}
   m_Layer: 0
   m_Name: PlayerZombie@Prefab
   m_TagString: Untagged
@@ -33,6 +34,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3519977995403908192}
+  - {fileID: 1634497601046944436}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,6 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animatorPrefixSetter: {fileID: 3519977994764162468}
   _speed: 3
+  _punchZone: {fileID: 6890342444443984770}
   _upKey: 119
   _downKey: 115
   _rightKey: 100
@@ -121,6 +124,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dbEntry: {fileID: 11400000, guid: 59dd9b05665164945bf941438355bcc0, type: 2}
   _key: Prefab
+--- !u!114 &-6552964797007865710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3519977994764162475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33f45e9d2fb4666b94ea781528f1266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultLives: 5
+  _onDie:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3519977995403908195
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +210,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8272142783148801640, guid: eee9320a7fd3c4085b00f3ae185045b8,
+  m_Sprite: {fileID: 8272142783148801640, guid: 2271d218765674ddd968344f04df4d14,
     type: 3}
   m_Color: {r: 0.36044857, g: 0.5660378, b: 0.38681278, a: 1}
   m_FlipX: 0
@@ -219,73 +238,192 @@ MonoBehaviour:
   _states:
   - name: down_idle
     sprites:
-    - {fileID: 8272142783148801640, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
+    - {fileID: 8272142783148801640, guid: 2271d218765674ddd968344f04df4d14, type: 3}
     events: []
     loop: 1
     nextStateName: 
   - name: up_idle
     sprites:
-    - {fileID: 8272142783148801640, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
+    - {fileID: 8272142783148801640, guid: 2271d218765674ddd968344f04df4d14, type: 3}
     events: []
     loop: 1
     nextStateName: 
   - name: right_idle
     sprites:
-    - {fileID: 8825708880808182413, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
+    - {fileID: 8825708880808182413, guid: 2271d218765674ddd968344f04df4d14, type: 3}
     events: []
     loop: 1
     nextStateName: 
   - name: left_idle
     sprites:
-    - {fileID: 2597200032890666263, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
+    - {fileID: 2597200032890666263, guid: 2271d218765674ddd968344f04df4d14, type: 3}
     events: []
     loop: 1
     nextStateName: 
   - name: down_run
     sprites:
-    - {fileID: 6229475176806256544, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: 4582055391396294686, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: 6229475176806256544, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: -8297923455183318996, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: -6912247537514708886, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: 861927037456533431, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: -6912247537514708886, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: -8297923455183318996, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
+    - {fileID: 6229475176806256544, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 4582055391396294686, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 6229475176806256544, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -8297923455183318996, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -6912247537514708886, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 861927037456533431, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -6912247537514708886, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -8297923455183318996, guid: 2271d218765674ddd968344f04df4d14, type: 3}
     events: []
     loop: 1
     nextStateName: 
   - name: up_run
     sprites:
-    - {fileID: 6229475176806256544, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: 4582055391396294686, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: 6229475176806256544, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: -8297923455183318996, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: -6912247537514708886, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: 861927037456533431, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: -6912247537514708886, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: -8297923455183318996, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
+    - {fileID: 6229475176806256544, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 4582055391396294686, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 6229475176806256544, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -8297923455183318996, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -6912247537514708886, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 861927037456533431, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -6912247537514708886, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -8297923455183318996, guid: 2271d218765674ddd968344f04df4d14, type: 3}
     events: []
     loop: 1
     nextStateName: 
   - name: right_run
     sprites:
-    - {fileID: -6599821223689010129, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: -8637415394462286988, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: -6599821223689010129, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: 8546997272459300083, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
+    - {fileID: -6599821223689010129, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -8637415394462286988, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -6599821223689010129, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 8546997272459300083, guid: 2271d218765674ddd968344f04df4d14, type: 3}
     events: []
     loop: 1
     nextStateName: 
   - name: left_run
     sprites:
-    - {fileID: 5244724991022902767, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: 447700158057349542, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: 5244724991022902767, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
-    - {fileID: 741689897422597577, guid: eee9320a7fd3c4085b00f3ae185045b8, type: 3}
+    - {fileID: 5244724991022902767, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 447700158057349542, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 5244724991022902767, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 741689897422597577, guid: 2271d218765674ddd968344f04df4d14, type: 3}
     events: []
     loop: 1
     nextStateName: 
+  - name: down_punch
+    sprites:
+    - {fileID: 6634876438453711107, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 2873188099083850248, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -4790861036539490750, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    events:
+    - frame: 1
+      eventName: punch
+    - frame: 2
+      eventName: punchEnded
+    loop: 0
+    nextStateName: down_idle
+  - name: up_punch
+    sprites:
+    - {fileID: -7556041589323596890, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -5491525469408818761, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -4421790350300465740, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    events:
+    - frame: 1
+      eventName: punch
+    - frame: 2
+      eventName: punchEnded
+    loop: 0
+    nextStateName: up_idle
+  - name: right_punch
+    sprites:
+    - {fileID: -6614873484589059235, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 363193631842421802, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -479388101199475288, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    events:
+    - frame: 1
+      eventName: punch
+    - frame: 2
+      eventName: punchEnded
+    loop: 0
+    nextStateName: right_idle
+  - name: left_punch
+    sprites:
+    - {fileID: -8909524293641689730, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: 850274782515462021, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    - {fileID: -542959009318755409, guid: 2271d218765674ddd968344f04df4d14, type: 3}
+    events:
+    - frame: 1
+      eventName: punch
+    - frame: 2
+      eventName: punchEnded
+    loop: 0
+    nextStateName: left_idle
   _onStateEvent:
     m_PersistentCalls:
       m_Calls: []
   _fps: 12
+--- !u!1 &3891589133933004875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1634497601046944436}
+  - component: {fileID: 4536292407629527871}
+  - component: {fileID: 6890342444443984770}
+  m_Layer: 0
+  m_Name: PunchZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1634497601046944436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891589133933004875}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.265, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3519977994764162473}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &4536292407629527871
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891589133933004875}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6890342444443984770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891589133933004875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1375a74814b941a38a7d8344e007d13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onPunchZoneEntered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3519977994764162471}
+        m_MethodName: OnEnterPunchZone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

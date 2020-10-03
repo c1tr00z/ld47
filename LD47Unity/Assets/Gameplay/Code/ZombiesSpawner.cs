@@ -65,8 +65,6 @@ namespace c1tr00z.ld47.Gameplay {
         public void ClearSpawnData() {
             RefreshSlots();
             _spawnData = new bool[_slots.GetLength(0), _slots.GetLength(1)];
-            Debug.LogError(_slots.Length);
-            Debug.LogError(_spawnData.Length);
         }
 
         private void RefreshSlots() {

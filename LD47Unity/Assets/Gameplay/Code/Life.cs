@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace c1tr00z.ld47.Gameplay {
     public class Life :  MonoBehaviour {
@@ -23,6 +24,8 @@ namespace c1tr00z.ld47.Gameplay {
         #region Serialized Fields
 
         [SerializeField] private int _defaultLives;
+
+        [SerializeField] private UnityEvent _onDie;
 
         #endregion
 
@@ -48,7 +51,11 @@ namespace c1tr00z.ld47.Gameplay {
 
         public void Damage(int damage) {
             this.damage += damage;
+            damaged?.Invoke(this);
             if (this.damage >= maxLives) {
+                if (_onDie != null) {
+                    _onDie?.Invoke();
+                }
                 died?.Invoke(this);
             }
         }

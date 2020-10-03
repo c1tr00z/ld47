@@ -10,6 +10,10 @@ namespace c1tr00z.ld47.Gameplay {
 
         private Vector3 _direction;
 
+        private float _stunSeconds;
+
+        private float _startStun;
+
         #endregion
 
         #region Serialized Fields
@@ -24,11 +28,23 @@ namespace c1tr00z.ld47.Gameplay {
 
         public Rigidbody rigidbody => this.GetCachedComponent(ref _rigidbody);
 
+        public bool isMoving { get; protected set; } = true;
+
+        public SpriteAnimatorPrefixSetter animatorPrefixSetter => _animatorPrefixSetter;
+
+        public bool isOtherAnimations { get; protected set; }
+
         #endregion
         
         #region Unity Event
 
         protected virtual void LateUpdate() {
+            if (!isMoving) {
+                return;
+            }
+            if (Time.time - _startStun < _stunSeconds) {
+                return;
+            }
             Move();
             RefreshMoveState();
         }
@@ -48,11 +64,19 @@ namespace c1tr00z.ld47.Gameplay {
         }
 
         private void RefreshMoveState() {
+            if (isOtherAnimations) {
+                return;
+            }
             var state = "idle";
             if (rigidbody.velocity.magnitude > 0.1f) {
                 state = "run";
             }
             _animatorPrefixSetter.PlayState(state);
+        }
+
+        public void Stun(float seconds) {
+            _startStun = Time.time;
+            _stunSeconds = seconds;
         }
 
         #endregion
