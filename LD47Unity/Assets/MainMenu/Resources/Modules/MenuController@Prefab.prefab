@@ -47,6 +47,7 @@ MonoBehaviour:
   _menuScene: {fileID: 11400000, guid: 2b0213e23c76a4003bdaeeda85100c0f, type: 2}
   _gameScene: {fileID: 11400000, guid: 3f6477488eb6142d08e50ccf9eec9263, type: 2}
   _menuFrame: {fileID: 11400000, guid: 9820af970343f48e293b1ef5a32a6da9, type: 2}
+  _menuPopup: {fileID: 11400000, guid: b11aa5497e7474fa29a654007d1b28cf, type: 2}
 --- !u!114 &7726350772205076868
 MonoBehaviour:
   m_ObjectHideFlags: 0

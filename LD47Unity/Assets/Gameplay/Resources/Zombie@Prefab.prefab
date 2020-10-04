@@ -66,7 +66,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &9055961143089991508
 MonoBehaviour:
@@ -83,6 +83,9 @@ MonoBehaviour:
   _animatorPrefixSetter: {fileID: 6797982603889586382}
   _speed: 3
   _punchZone: {fileID: 8671578837359254315}
+  _punchCooldown: 3
+  _damage: 1
+  _hurt: {fileID: 0}
 --- !u!114 &7354338551283393532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +141,20 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9055961143089991508}
         m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onDamaged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9055961143089991508}
+        m_MethodName: OnDamage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -319,7 +336,9 @@ MonoBehaviour:
     events:
     - frame: 1
       eventName: punch
-    loop: 1
+    - frame: 2
+      eventName: punchEnded
+    loop: 0
     nextStateName: down_idle
   - name: up_punch
     sprites:
@@ -329,8 +348,10 @@ MonoBehaviour:
     events:
     - frame: 1
       eventName: punch
-    loop: 1
-    nextStateName: down_idle
+    - frame: 2
+      eventName: punchEnded
+    loop: 0
+    nextStateName: up_idle
   - name: right_punch
     sprites:
     - {fileID: -6614873484589059235, guid: 2271d218765674ddd968344f04df4d14, type: 3}
@@ -339,8 +360,10 @@ MonoBehaviour:
     events:
     - frame: 1
       eventName: punch
-    loop: 1
-    nextStateName: down_idle
+    - frame: 2
+      eventName: punchEnded
+    loop: 0
+    nextStateName: right_idle
   - name: left_punch
     sprites:
     - {fileID: -8909524293641689730, guid: 2271d218765674ddd968344f04df4d14, type: 3}
@@ -349,8 +372,34 @@ MonoBehaviour:
     events:
     - frame: 1
       eventName: punch
-    loop: 1
+    - frame: 2
+      eventName: punchEnded
+    loop: 0
+    nextStateName: left_idle
+  - name: down_hurt
+    sprites:
+    - {fileID: 21300000, guid: 11e33765a78ca45efbbecaa2400d998c, type: 3}
+    events: []
+    loop: 0
     nextStateName: down_idle
+  - name: up_hurt
+    sprites:
+    - {fileID: 21300000, guid: 11e33765a78ca45efbbecaa2400d998c, type: 3}
+    events: []
+    loop: 0
+    nextStateName: up_idle
+  - name: right_hurt
+    sprites:
+    - {fileID: 21300000, guid: 11e33765a78ca45efbbecaa2400d998c, type: 3}
+    events: []
+    loop: 0
+    nextStateName: right_idle
+  - name: left_hurt
+    sprites:
+    - {fileID: 21300000, guid: 11e33765a78ca45efbbecaa2400d998c, type: 3}
+    events: []
+    loop: 0
+    nextStateName: left_idle
   _onStateEvent:
     m_PersistentCalls:
       m_Calls: []

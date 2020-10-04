@@ -19,6 +19,8 @@ namespace c1tr00z.ld47.Gameplay {
         
         private bool[,] _spawnData = new bool[0,0];
 
+        public List<Vector2Int> excludeSlots = new List<Vector2Int>();
+
         #endregion
 
         #region Private Fields
@@ -55,6 +57,10 @@ namespace c1tr00z.ld47.Gameplay {
             Gizmos.DrawWireCube(myTransform.position, _size.ToVector3XZ());
             IterateSlots((x, y, point) => {
                 Gizmos.DrawWireSphere(point, 1f);
+            });
+            Gizmos.color = Color.blue;
+            excludeSlots.ForEach(es => {
+                Gizmos.DrawWireSphere(transform.position + es.ToVector3().ToVector3XZ(), 1f);
             });
         }
 
@@ -122,7 +128,7 @@ namespace c1tr00z.ld47.Gameplay {
                 randomSlot = new Vector2Int(Random.Range(0, _slots.GetLength(0)), 
                     Random.Range(0, _slots.GetLength(1)));
 
-                if (_spawnData[randomSlot.x, randomSlot.x]) {
+                if (_spawnData[randomSlot.x, randomSlot.x] || excludeSlots.Contains(randomSlot)) {
                     // Debug.LogError(randomSlot);
                 } else {
                     _spawnData[randomSlot.x, randomSlot.x] = true;

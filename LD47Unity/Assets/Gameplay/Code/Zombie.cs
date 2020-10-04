@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -92,6 +93,11 @@ namespace c1tr00z.ld47.Gameplay {
 
         #region Class Implementation
 
+        public override void OnDamage() {
+            animatorPrefixSetter.PlayState("hurt");
+            Stun(.2f);
+        }
+
         public void Die() {
             Destroy(gameObject);
         }
@@ -104,8 +110,12 @@ namespace c1tr00z.ld47.Gameplay {
 
         public override void OnEnterPunchZone() {
             if (GetAllInPunchZone().OfType<Player>().Any()) {
-                Punch<Player>();
+                Punch();
             }
+        }
+
+        public override List<IDamageable> SelectPuncheables(List<IDamageable> damageables) {
+            return damageables.Where(d => d is Player).ToList();
         }
     }
 }

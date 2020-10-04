@@ -20,6 +20,8 @@ namespace c1tr00z.ld47.MainMenu {
         [SerializeField] private SceneItem _gameScene;
 
         [SerializeField] private UIFrameDBEntry _menuFrame;
+        
+        [SerializeField] private UIFrameDBEntry _menuPopup;
 
         #endregion
 
@@ -33,6 +35,20 @@ namespace c1tr00z.ld47.MainMenu {
 
         private void Start() {
             ShowMenuFrame();
+        }
+
+        private void OnEnable() {
+            Scenes.sceneLoaded += ScenesOnsceneLoaded;
+        }
+
+        private void OnDisable() {
+            Scenes.sceneLoaded -= ScenesOnsceneLoaded;
+        }
+
+        private void Update() {
+            if (Input.GetKeyUp(KeyCode.Escape)) {
+                _menuPopup.Show();
+            }
         }
 
         #endregion
@@ -51,6 +67,15 @@ namespace c1tr00z.ld47.MainMenu {
             if (scenes.currentSceneItem != _menuScene) {
                 return;
             }
+            _menuFrame.Show();
+        }
+
+        private void ScenesOnsceneLoaded(SceneItem scene) {
+            if (scene != _menuScene) {
+                return;
+            }
+
+            Time.timeScale = 1;
             _menuFrame.Show();
         }
 

@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: DB
   m_EditorClassIdentifier: 
   paths:
+  - AppSettings
   - DB
+  - DiedFrame
   - GameScene
+  - Hints
   - MenuFrame
+  - MenuPopup
   - MenuScene
   - Modules/MenuController
   - Modules/Scenes
@@ -23,9 +27,13 @@ MonoBehaviour:
   - Player
   - PlayerZombie
   - PlayFrame
+  - Progression
   - Saves/SavePlayerPrefs
   - Saves/SaveToBinaryFile
   - Saves/SaveToTXTFile
+  - Shotgun
   - UI/UIDefaults
   - UI/UILayerMain
+  - UI/UILayerPopup
+  - WinFrame
   - Zombie

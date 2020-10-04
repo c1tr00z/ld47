@@ -44,6 +44,8 @@ namespace c1tr00z.ld47.Gameplay {
         #region Class Implementation
 
         private void CheckCollider(Collider other) {
+            _zombies = _zombies.Where(z => z != null && z.GetTransform() != null && z.GetTransform().gameObject != null)
+                .ToList();
             var zombie = other.GetColliderComponent<IZombie>();
 
             if (zombie == null) {
@@ -66,6 +68,8 @@ namespace c1tr00z.ld47.Gameplay {
         }
 
         public IZombie GetNearest() {
+            _zombies = _zombies.Where(z => z != null && z.GetTransform() != null && z.GetTransform().gameObject != null)
+                .ToList();
             return _zombies.MinElement(z => transform.GetDistance(z.GetTransform()));
         }
 

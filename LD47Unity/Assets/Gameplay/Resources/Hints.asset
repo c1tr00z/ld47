@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5769402eb804f31a069e4d58d60696e, type: 3}
+  m_Name: Hints
+  m_EditorClassIdentifier: 
+  hints:
+  - You can toss coin (RMB) to ATM to save it between loops
+  - You can punch (LMB) zombies to kill them and get exp and coins
+  - You can break Blood Jar and colorize yourself
+  - if you have shotgun you can't toss coins
+  - To end loop kill the Player
+  - Your health and damage grows with your level
+  - You can break ATM for retrieving all your money

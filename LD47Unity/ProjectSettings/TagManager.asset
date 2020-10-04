@@ -14,10 +14,10 @@ TagManager:
   - 
   - 
   - Bullet
-  - 
-  - 
-  - 
-  - 
+  - PlayerZombie
+  - CoinBullet
+  - Picupable
+  - Wall
   - 
   - 
   - 

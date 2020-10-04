@@ -12,12 +12,26 @@ namespace c1tr00z.ld47.Gameplay {
 
         private Transform _transform;
 
+        private float _lastPunchTime;
+
         #endregion
 
         #region Serialized Fields
 
         [SerializeField]
         private PunchZone _punchZone;
+
+        [SerializeField] private float _punchCooldown;
+
+        [SerializeField] private int _damage = 1;
+
+        [SerializeField] private AudioSource _hurt;
+
+        #endregion
+
+        #region Accessors
+
+        public virtual int damage => _damage;
 
         #endregion
 
@@ -52,13 +66,12 @@ namespace c1tr00z.ld47.Gameplay {
         }
 
         public void Punch() {
-            isMoving = false;
-            Punch<IDamageable>();
-        }
+            if (Time.time - _lastPunchTime < _punchCooldown) {
+                return;
+            }
 
-        public void Punch<T>() {
-            var allFits = _punchZone.GetAllInPunchZone().OfType<T>();
-            allFits.OfType<IDamageable>().ForEach(d => d.Damage(1));
+            _lastPunchTime = Time.time;
+            isMoving = false;
             animatorPrefixSetter.PlayState("punch");
         }
 
@@ -66,16 +79,32 @@ namespace c1tr00z.ld47.Gameplay {
             
         }
 
+        public virtual List<IDamageable> SelectPuncheables(List<IDamageable> damageables) {
+            return damageables;
+        }
+
+        private void PerformDamage(List<IDamageable> damageables) {
+            if (_hurt != null) {
+                _hurt.Play();
+            }
+            damageables.OfType<IDamageable>().ForEach(d => d.Damage(damage));
+        }
+
         public void OnAnimationEvent(string eventName) {
-            Debug.LogError(eventName);
             if (eventName == "punchEnded") {
-                isMoving = true;
-                Debug.LogError("Can move again");
+                isMoving = true;;
+                return;
+            }
+            if (eventName == "punch") {
+                PerformDamage(SelectPuncheables(_punchZone.GetAllInPunchZone()));
             }
         }
 
         protected List<IDamageable> GetAllInPunchZone() {
             return _punchZone.GetAllInPunchZone();
+        }
+
+        public virtual void OnDamage() {
         }
 
         #endregion

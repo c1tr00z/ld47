@@ -18,6 +18,7 @@ namespace c1tr00z.ld47.Gameplay {
             if (damageable == null) {
                 return;
             }
+
             _damageables.Add(damageable);
             if (_onPunchZoneEntered != null) {
                 _onPunchZoneEntered.Invoke();
@@ -40,7 +41,7 @@ namespace c1tr00z.ld47.Gameplay {
         public List<IDamageable> GetAllInPunchZone() {
             _damageables = _damageables
                 .Where(d => d != null && d.GetLife() != null 
-                                      && d.GetLife().gameObject != null).ToList();
+                                      && d.GetLife().gameObject != null && d.GetLife().gameObject.activeSelf).ToList();
             return _damageables;
         }
     }

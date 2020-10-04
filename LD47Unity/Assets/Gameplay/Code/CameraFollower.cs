@@ -1,4 +1,5 @@
 using System;
+using c1tr00z.AssistLib.AppModules;
 using UnityEngine;
 
 namespace c1tr00z.ld47.Gameplay {
@@ -16,6 +17,11 @@ namespace c1tr00z.ld47.Gameplay {
 
         private void OnEnable() {
             GameplayController.playerZombieSpawned += GameplayControllerOnplayerZombieSpawned;
+            GameplayController.playerDied += GameplayControllerOnplayerDied;
+        }
+
+        private void OnDisable() {
+            GameplayController.playerZombieSpawned += GameplayControllerOnplayerZombieSpawned;
         }
 
         private void LateUpdate() {
@@ -32,6 +38,10 @@ namespace c1tr00z.ld47.Gameplay {
         
         private void GameplayControllerOnplayerZombieSpawned(PlayerZombie playerZombie) {
             _target = playerZombie.transform;
+        }
+
+        private void GameplayControllerOnplayerDied() {
+            _target = Modules.Get<GameplayController>().player.transform;
         }
     }
 }
